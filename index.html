@@ -64,6 +64,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-给定一个二叉树，判断它是否是高度平衡的二叉树。" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/01/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%88%A4%E6%96%AD%E5%AE%83%E6%98%AF%E5%90%A6%E6%98%AF%E9%AB%98%E5%BA%A6%E5%B9%B3%E8%A1%A1%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%82/" class="article-date">
+  <time datetime="2020-07-01T14:37:38.000Z" itemprop="datePublished">2020-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/01/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%88%A4%E6%96%AD%E5%AE%83%E6%98%AF%E5%90%A6%E6%98%AF%E9%AB%98%E5%BA%A6%E5%B9%B3%E8%A1%A1%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%82/">给定一个二叉树，判断它是否是高度平衡的二叉树。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="给定一个二叉树，判断它是否是高度平衡的二叉树。"><a href="#给定一个二叉树，判断它是否是高度平衡的二叉树。" class="headerlink" title="给定一个二叉树，判断它是否是高度平衡的二叉树。"></a>给定一个二叉树，判断它是否是高度平衡的二叉树。</h3><blockquote>
+<p>高度平衡二叉树：一个二叉树每个节点的左右两个子树的高度差的绝对值不超过1</p>
+</blockquote>
+<p>高度平衡二叉树这里有两种解法：</p>
+<h4 id="自底向上"><a href="#自底向上" class="headerlink" title="自底向上"></a>自底向上</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">height</span><span class="params">(TreeNode tree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(tree)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> left = height(tree.left);</span><br><span class="line">    <span class="keyword">if</span> (left == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> right = height(tree.right);</span><br><span class="line">    <span class="keyword">if</span> (right == -<span class="number">1</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Math.abs(left - right)&lt;<span class="number">2</span>?Math.max(left, right)+<span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自底向上</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isBalanced</span><span class="params">(TreeNode tree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> height(tree) != -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>递归到根节点的左节点的最下级左叶子节点，和对应的右叶子；</li>
+<li>当左右节点高度差是否&lt;2 ,表示这颗子树是高度平衡的，返回当前子树的根节点的高度（即左右节点最大高度+1）</li>
+<li>当高度相差&gt;=2时，表示这棵树不是高度平衡二叉树。</li>
+</ul>
+<p><strong>复杂度</strong>：</p>
+<ul>
+<li>时间复杂度O(N)：当为高度平衡二叉树时，会遍历所有节点</li>
+<li>空间复杂度O(N): 树退化为链表时，系统递归需要使用O(N) 的栈空间</li>
+</ul>
+<h3 id="自顶向下"><a href="#自顶向下" class="headerlink" title="自顶向下"></a>自顶向下</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后序遍历 实现深度搜索</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">height2</span><span class="params">(TreeNode tree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(tree)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> left = height2(tree.left) +<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> right = height2(tree.right) +<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Math.max(left,right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自顶向下</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isBalanced2</span><span class="params">(TreeNode tree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(tree)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Math.abs(height2(tree.left) - height2(tree.right)) &lt;<span class="number">2</span> &amp;&amp; isBalanced2(tree.left) &amp;&amp; isBalanced2(tree.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>先递归计算根节点的左右节点的深度进行比较，判断是否为高度平衡二叉树</li>
+<li>在分别递归计算左节点和右子树的左右节点，判断是否为高度平衡二叉树</li>
+</ul>
+<p>这个缺点很明显，对子树的重复递归遍历</p>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度 O(NlogN)：遍历树所有节点，占用 O(N)；判断每个节点的最大高度 需要遍历 各子树的所有节点 ，子树的节点数的复杂度为 O(logN)。</li>
+<li>空间复杂度 O(N)：树退化为链表时，系统递归需要使用O(N)的栈空间。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/01/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%88%A4%E6%96%AD%E5%AE%83%E6%98%AF%E5%90%A6%E6%98%AF%E9%AB%98%E5%BA%A6%E5%B9%B3%E8%A1%A1%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%82/" data-id="ckc3gyamg0000rcv4504c6xu1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-每日算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/18/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95/" class="article-date">
@@ -230,7 +298,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li></ul>
     </div>
   </div>
 
@@ -241,6 +309,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/07/01/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%88%A4%E6%96%AD%E5%AE%83%E6%98%AF%E5%90%A6%E6%98%AF%E9%AB%98%E5%BA%A6%E5%B9%B3%E8%A1%A1%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%82/">给定一个二叉树，判断它是否是高度平衡的二叉树。</a>
+          </li>
         
           <li>
             <a href="/2020/06/18/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95/">二叉树</a>
