@@ -15,7 +15,7 @@
 <meta property="og:description" content="给定一个二叉树，判断它是否是高度平衡的二叉树。 高度平衡二叉树：一个二叉树每个节点的左右两个子树的高度差的绝对值不超过1  高度平衡二叉树这里有两种解法： 自底向上123456789101112131415161718private int height(TreeNode tree) &amp;#123;    if (Objects.isNull(tree)) &amp;#123;        return">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-01T14:37:38.000Z">
-<meta property="article:modified_time" content="2020-07-01T14:42:17.969Z">
+<meta property="article:modified_time" content="2020-07-05T14:09:04.816Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary">
@@ -116,7 +116,7 @@
 <p>这个缺点很明显，对子树的重复递归遍历</p>
 <p><strong>复杂度分析</strong>：</p>
 <ul>
-<li>时间复杂度 O(NlogN)：遍历树所有节点，占用 O(N)；判断每个节点的最大高度 需要遍历 各子树的所有节点 ，子树的节点数的复杂度为 O(logN)。</li>
+<li>时间复杂度 O(logN)：遍历树所有节点，占用 O(N)；判断每个节点的最大高度 需要遍历 各子树的所有节点 ，子树的节点数的复杂度为 O(logN)。</li>
 <li>空间复杂度 O(N)：树退化为链表时，系统递归需要使用O(N)的栈空间。</li>
 </ul>
 
@@ -202,6 +202,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/07/05/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%85%B6%E8%8A%82%E7%82%B9%E5%80%BC%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">给定一个二叉树，返回其节点值自底向上的层次遍历</a>
+          </li>
         
           <li>
             <a href="/2020/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">二叉树的最近公共祖先</a>
