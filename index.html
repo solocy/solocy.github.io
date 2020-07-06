@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-二叉树的锯齿形层次遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="article-date">
+  <time datetime="2020-07-06T14:37:41.000Z" itemprop="datePublished">2020-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">二叉树的锯齿形层次遍历</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="二叉树的锯齿形层次遍历"><a href="#二叉树的锯齿形层次遍历" class="headerlink" title="二叉树的锯齿形层次遍历"></a>二叉树的锯齿形层次遍历</h3><blockquote>
+<p>给定一个二叉树，返回其节点值的锯齿形层次遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p>
+</blockquote>
+<p>解题思路：<br>层序遍历我们已经学过了，这里对偶数行的结果倒过来就解答了。<br>这里我们使用LinkList来存结果，可以从前或从后插入。<br>用标识b来判断当前是奇数行还是偶数行。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;List&lt;Integer&gt;&gt; zigzagLevelOrder(TreeNode tree) &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(tree)) <span class="keyword">return</span> result;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">boolean</span> b = <span class="keyword">true</span>;</span><br><span class="line">    queue.add(tree);</span><br><span class="line">    queue.add(<span class="keyword">null</span>);</span><br><span class="line">    LinkedList&lt;Integer&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        TreeNode node = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (Objects.nonNull(node)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (b) &#123;</span><br><span class="line">                list.addLast(node.val);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                list.addFirst(node.val);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.left)) queue.add(node.left);</span><br><span class="line">            <span class="keyword">if</span> (Objects.nonNull(node.right)) queue.add(node.right);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result.add(list);</span><br><span class="line">            list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">            b = !b;</span><br><span class="line">            <span class="keyword">if</span> (!queue.isEmpty()) queue.add(<span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>复杂度计算：</p>
+<p>空间复杂度O(N):<br>时间复杂度O(N):每个节点只访问1次</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" data-id="ckcalzqxq00000ov4d317c46a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-给定一个二叉树，返回其节点值自底向上的层次遍历" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/05/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%85%B6%E8%8A%82%E7%82%B9%E5%80%BC%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="article-date">
@@ -480,6 +525,10 @@
       <ul>
         
           <li>
+            <a href="/2020/07/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">二叉树的锯齿形层次遍历</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/05/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%85%B6%E8%8A%82%E7%82%B9%E5%80%BC%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">给定一个二叉树，返回其节点值自底向上的层次遍历</a>
           </li>
         
@@ -493,10 +542,6 @@
         
           <li>
             <a href="/2020/07/01/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%88%A4%E6%96%AD%E5%AE%83%E6%98%AF%E5%90%A6%E6%98%AF%E9%AB%98%E5%BA%A6%E5%B9%B3%E8%A1%A1%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%82/">给定一个二叉树，判断它是否是高度平衡的二叉树。</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/18/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95/">二叉树</a>
           </li>
         
       </ul>
