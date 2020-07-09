@@ -64,6 +64,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-二叉搜索树中的插入操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/09/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time datetime="2020-07-09T13:29:22.000Z" itemprop="datePublished">2020-07-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/09/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C/"> 二叉搜索树中的插入操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="二叉搜索树中的插入操作"><a href="#二叉搜索树中的插入操作" class="headerlink" title="二叉搜索树中的插入操作"></a>二叉搜索树中的插入操作</h2><blockquote>
+<p>给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 保证原始二叉搜索树中不存在新值。</p>
+</blockquote>
+<p>解题思路：</p>
+<p>1: 递归</p>
+<p>s与根节点作比较，大于根节点递归根节点的右节点和s，相对应的小于根节点递归根节点的左节点和s，当递归节点为null时，返回值为s的节点。将递归值赋值给当前对应的左右节点。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">insertIntoBST</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(root)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(val);</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode node;</span><br><span class="line">    <span class="keyword">if</span> (root.val &gt; val) &#123;</span><br><span class="line">        node =  insertIntoBST(root.left,val);</span><br><span class="line">        <span class="keyword">return</span> root.left = node;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        node =  insertIntoBST(root.right,val);</span><br><span class="line">        <span class="keyword">return</span> root.right = node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>复杂度计算：<br>空间复杂度O(N)： N为树的高度<br>时间复杂度O(N)： N为树的高度，当树为链表时，N为节点数</p>
+<p>2.遍历</p>
+<p>方法和上面差不多，直接上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">insertIntoBST2</span><span class="params">(TreeNode root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    TreeNode node =root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (Objects.nonNull(node)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node.val &gt; val) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Objects.isNull(node.left)) &#123;</span><br><span class="line">                node.left = <span class="keyword">new</span> TreeNode(val);</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.left;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (Objects.isNull(node.right)) &#123;</span><br><span class="line">                node.right = <span class="keyword">new</span> TreeNode(val);</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            &#125;</span><br><span class="line">            node = root.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>复杂度计算：<br>空间复杂度O(1)<br>时间复杂度O(N)： N为树的高度，当树为链表时，N为节点数</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/09/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C/" data-id="ckcetvfky0000oov4er86e0e0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-验证二叉搜索树" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/07/%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" class="article-date">
@@ -642,6 +699,10 @@
       <ul>
         
           <li>
+            <a href="/2020/07/09/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C/"> 二叉搜索树中的插入操作</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/07/%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">验证二叉搜索树</a>
           </li>
         
@@ -655,10 +716,6 @@
         
           <li>
             <a href="/2020/07/05/%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%85%B6%E8%8A%82%E7%82%B9%E5%80%BC%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">给定一个二叉树，返回其节点值自底向上的层次遍历</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">二叉树的最近公共祖先</a>
           </li>
         
       </ul>
